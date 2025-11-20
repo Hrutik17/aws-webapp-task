@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Add Task</h3>
+<input id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<script>
+const API_URL = "https://d1fbv3e2sc.execute-api.eu-north-1.amazonaws.com/prod";
+
+
+function addTask() {
+    const task = document.getElementById("taskInput").value;
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ task: task })
+    })
+    .then(response => response.json())
+    .then(data => alert(JSON.stringify(data)))
+    .catch(err => alert("Error: " + err));
+}
+</script>
+
+</body>
+</html>
